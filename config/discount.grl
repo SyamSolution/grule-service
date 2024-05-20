@@ -1,0 +1,7 @@
+rule CheckDiscount "Check discount" salience 10 {
+	when
+		D.isContinentSoldOut == true && D.isContinentDiff == true
+	then
+		D.DiscountAmount = 20.0;
+		Retract("CheckDiscount");
+}
