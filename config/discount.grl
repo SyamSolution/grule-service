@@ -1,6 +1,6 @@
 rule CheckDiscount "Check discount" salience 10 {
 	when
-		D.isContinentSoldOut == true && D.isContinentDiff == true
+		D.IsContinentSoldOut == true && D.IsContinentDiff == true
 	then
 		D.DiscountAmount = 20.0;
 		Retract("CheckDiscount");

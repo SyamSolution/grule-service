@@ -22,13 +22,16 @@ func main() {
 	//fiberProm := middleware.NewWithRegistry(prometheus.DefaultRegisterer, "transaction-service", "", "", map[string]string{})
 
 	knowledgeEligibleBase := knowledgeBase("eligible", "EligibleRules")
+	knowledgeDiscountBase := knowledgeBase("discount", "DiscountRules")
 
 	//=== usecase lists start ===//
 	eligibleUsecase := usecase.NewEligibleUsecase(baseDep.Logger, knowledgeEligibleBase)
+	discountUsecase := usecase.NewDiscountUsecase(baseDep.Logger, knowledgeDiscountBase)
 	//=== usecase lists end ===//
 
 	//=== handler lists start ===//
 	eligibleHandler := handler.NewEligibleHandler(eligibleUsecase, baseDep.Logger)
+	discountHandler := handler.NewDiscountHandler(discountUsecase, baseDep.Logger)
 	//=== handler lists end ===//
 
 	app := fiber.New()
@@ -37,8 +40,9 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 
-	//=== transaction routes ===//
+	//=== rules routes ===//
 	app.Post("/check-eligible", eligibleHandler.CheckEligibility)
+	app.Post("/check-discount", discountHandler.CheckDiscount)
 
 	//=== listen port ===//
 	if err := app.Listen(fmt.Sprintf(":%s", os.Getenv("APP_PORT"))); err != nil {

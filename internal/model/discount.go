@@ -1,7 +1,7 @@
 package model
 
 type Discount struct {
-	isContinentSoldOut bool
-	isContinentDiff    bool
-	DiscountAmount     float32
+	IsContinentSoldOut bool    `json:"isContinentSoldOut"`
+	IsContinentDiff    bool    `json:"isContinentDiff"`
+	DiscountAmount     float32 `json:"discountAmount"`
 }
