@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "public.ecr.aws/prodigy-backend/ticket-grule",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "4004"
+    }
+  ]
+}
