@@ -1,6 +1,6 @@
 rule CheckEligible "Check eligible" salience 10 {
 	when
-		(E.Day == "Saturday" || E.Day == "Sunday" || E.Day == "Tuesday") &&
+		(E.Day == "Saturday" || E.Day == "Sunday" || E.Day == "Tuesday" || E.Day == "Wednesday" || E.Day == "Thursday" || E.Day == "Friday") &&
 		(E.Month == "May" || E.Month == "June" || E.Month == "July" || E.Month == "August") &&
 		E.Year == "2024"
 	then
