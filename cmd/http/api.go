@@ -2,16 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
+
 	"github.com/SyamSolution/grule-service/config"
 	"github.com/SyamSolution/grule-service/internal/handler"
 	"github.com/SyamSolution/grule-service/internal/usecase"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gorules/zen-go"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
 	"github.com/hyperjumptech/grule-rule-engine/pkg"
 	"github.com/joho/godotenv"
-	"log"
-	"os"
 )
 
 func main() {
@@ -21,12 +23,12 @@ func main() {
 	//prometheus.MustRegister(dbCollector)
 	//fiberProm := middleware.NewWithRegistry(prometheus.DefaultRegisterer, "transaction-service", "", "", map[string]string{})
 
-	knowledgeEligibleBase := knowledgeBase("eligible", "EligibleRules")
-	knowledgeDiscountBase := knowledgeBase("discount", "DiscountRules")
+	rulebaseEligible := loadGoruleBase("./config/eligible-graph.json")
+	rulebaseDiscount := loadGoruleBase("./config/discount-graph.json")
 
 	//=== usecase lists start ===//
-	eligibleUsecase := usecase.NewEligibleUsecase(baseDep.Logger, knowledgeEligibleBase)
-	discountUsecase := usecase.NewDiscountUsecase(baseDep.Logger, knowledgeDiscountBase)
+	eligibleUsecase := usecase.NewEligibleUsecase(baseDep.Logger, rulebaseEligible)
+	discountUsecase := usecase.NewDiscountUsecase(baseDep.Logger, rulebaseDiscount)
 	//=== usecase lists end ===//
 
 	//=== handler lists start ===//
@@ -73,4 +75,20 @@ func knowledgeBase(ruleFile, ruleName string) *ast.KnowledgeBase {
 	knowledgeBase, _ := knowledgeLibrary.NewKnowledgeBaseInstance(ruleName, "0.0.1")
 
 	return knowledgeBase
+}
+
+func loadGoruleBase(ruleFile string) zen.Decision {
+
+	engine := zen.NewEngine(zen.EngineConfig{})
+
+	graph, err := os.ReadFile(ruleFile)
+	if err != nil {
+		panic(err)
+	}
+
+	decision, err := engine.CreateDecision(graph)
+	if err != nil {
+		panic(err)
+	}
+	return decision
 }

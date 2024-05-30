@@ -1,0 +1,143 @@
+{
+  "contentType": "application/vnd.gorules.decision",
+  "nodes": [
+    {
+      "id": "40b4c045-11ef-4bf0-993f-412cfccf0ff0",
+      "name": "request",
+      "type": "inputNode",
+      "position": {
+        "x": 20,
+        "y": 100
+      }
+    },
+    {
+      "id": "ac47a5d1-16a6-45d9-919e-c66e36c8339a",
+      "name": "response",
+      "type": "outputNode",
+      "position": {
+        "x": 750,
+        "y": 110
+      }
+    },
+    {
+      "id": "ca1a6bf4-2bb2-496b-affe-e0fc6ee3c99c",
+      "name": "decisionTable1",
+      "type": "decisionTableNode",
+      "content": {
+        "hitPolicy": "first",
+        "inputs": [
+          {
+            "id": "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4",
+            "name": "day",
+            "type": "expression",
+            "field": "day"
+          },
+          {
+            "id": "36717eed-2997-4259-bda2-5b85c660bbcd",
+            "type": "expression",
+            "field": "year",
+            "name": "year"
+          },
+          {
+            "id": "42109eaf-271a-4871-b814-96fdff234a9e",
+            "type": "expression",
+            "field": "month",
+            "name": "month"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "2ba50e68-e351-4ccf-9e06-770a7f54f1ab",
+            "name": "output",
+            "type": "expression",
+            "field": "output",
+            "defaultValue": "false"
+          }
+        ],
+        "rules": [
+          {
+            "_id": "974bea42-3efa-4e98-a910-e08ddc4ac8d6",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Monday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "582c49a1-967a-4719-8744-6d4fad2a01f7",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Sunday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "24ad320c-a15f-4995-82ec-3c627f87488c",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Saturday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "449850cc-4074-44ef-86ed-d787b3601273",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Tuesday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "7a4911ff-4aba-4b3a-a59e-50937f1a871b",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Wednesday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "de84d53b-5899-49e0-8b85-992ee0d1a807",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Thursday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "7e83fc07-bc33-4ba9-8913-cd0a1d7aec6e",
+            "_description": "eligible",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "\"Friday\"",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "\"2024\"",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "\"May\"",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "true"
+          },
+          {
+            "_id": "ad648884-2a0f-4732-98ec-3f94111d0fd6",
+            "b47ad8ea-cc6d-4bea-970a-b9fbe21c0fd4": "",
+            "36717eed-2997-4259-bda2-5b85c660bbcd": "",
+            "42109eaf-271a-4871-b814-96fdff234a9e": "",
+            "2ba50e68-e351-4ccf-9e06-770a7f54f1ab": "false"
+          }
+        ]
+      },
+      "position": {
+        "x": 395,
+        "y": 85
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "ecb8747e-8702-486c-898a-fb20d904249d",
+      "type": "edge",
+      "sourceId": "40b4c045-11ef-4bf0-993f-412cfccf0ff0",
+      "targetId": "ca1a6bf4-2bb2-496b-affe-e0fc6ee3c99c"
+    },
+    {
+      "id": "24bcd818-1e76-430c-b19a-270f8948e405",
+      "type": "edge",
+      "sourceId": "ca1a6bf4-2bb2-496b-affe-e0fc6ee3c99c",
+      "targetId": "ac47a5d1-16a6-45d9-919e-c66e36c8339a"
+    }
+  ]
+}

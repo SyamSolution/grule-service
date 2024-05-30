@@ -1,0 +1,92 @@
+{
+  "contentType": "application/vnd.gorules.decision",
+  "nodes": [
+    {
+      "id": "8016cfa0-e253-43c7-b574-48dc54f90cae",
+      "type": "inputNode",
+      "position": {
+        "x": 85,
+        "y": 100
+      },
+      "name": "request"
+    },
+    {
+      "id": "3a28318a-e993-4f07-8097-51e38dae1f10",
+      "type": "outputNode",
+      "position": {
+        "x": 630,
+        "y": 95
+      },
+      "name": "response"
+    },
+    {
+      "id": "774a10c2-79c5-49d2-bdbe-d9f5db1cc35f",
+      "type": "decisionTableNode",
+      "position": {
+        "x": 360,
+        "y": 95
+      },
+      "name": "decisionTable1",
+      "content": {
+        "hitPolicy": "first",
+        "inputs": [
+          {
+            "id": "4432bddd-c047-41ef-94b5-b32e9467a151",
+            "name": "isContinentSoldOut",
+            "type": "expression",
+            "field": "isContinentSoldOut"
+          },
+          {
+            "id": "2c51b84a-6db6-49b9-81c1-25c09522629a",
+            "type": "expression",
+            "field": "isContinentDiff",
+            "name": "isContinentDiff"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "e8ba9ce7-91ed-4b2f-bb93-653739a177f1",
+            "field": "output",
+            "name": "Output",
+            "type": "expression",
+            "defaultValue": "0"
+          }
+        ],
+        "rules": [
+          {
+            "_id": "6a09e408-261e-4b8f-94f4-254f4792e430",
+            "4432bddd-c047-41ef-94b5-b32e9467a151": "true",
+            "2c51b84a-6db6-49b9-81c1-25c09522629a": "true",
+            "e8ba9ce7-91ed-4b2f-bb93-653739a177f1": "20"
+          },
+          {
+            "_id": "ab7084b0-e013-4402-81f3-f839b994989d",
+            "4432bddd-c047-41ef-94b5-b32e9467a151": "",
+            "2c51b84a-6db6-49b9-81c1-25c09522629a": "",
+            "e8ba9ce7-91ed-4b2f-bb93-653739a177f1": "0"
+          },
+          {
+            "_id": "2f151dbc-6db4-474f-a7df-ae01e836e39b",
+            "4432bddd-c047-41ef-94b5-b32e9467a151": "",
+            "2c51b84a-6db6-49b9-81c1-25c09522629a": "",
+            "e8ba9ce7-91ed-4b2f-bb93-653739a177f1": ""
+          }
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "413d9448-3cdc-4941-b8f2-1110a523341b",
+      "sourceId": "8016cfa0-e253-43c7-b574-48dc54f90cae",
+      "type": "edge",
+      "targetId": "774a10c2-79c5-49d2-bdbe-d9f5db1cc35f"
+    },
+    {
+      "id": "616209d2-9445-4761-a5d6-3c09fb57e8d9",
+      "sourceId": "774a10c2-79c5-49d2-bdbe-d9f5db1cc35f",
+      "type": "edge",
+      "targetId": "3a28318a-e993-4f07-8097-51e38dae1f10"
+    }
+  ]
+}

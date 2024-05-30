@@ -1,40 +1,53 @@
 package usecase
 
 import (
+	"encoding/json"
+
 	"github.com/SyamSolution/grule-service/config"
 	"github.com/SyamSolution/grule-service/internal/model"
-	"github.com/hyperjumptech/grule-rule-engine/ast"
-	"github.com/hyperjumptech/grule-rule-engine/engine"
+	"github.com/gorules/zen-go"
 )
 
 type discountUsecase struct {
 	logger        config.Logger
-	knowledgeBase *ast.KnowledgeBase
+	ruleBase 	  zen.Decision
+}
+
+type ResultDataDiscount struct {
+	Output float32 `json:"output"`
 }
 
 type DiscountExecutor interface {
 	CheckDiscount(eligible *model.Discount) (float32, error)
 }
 
-func NewDiscountUsecase(logger config.Logger, knowledgeBase *ast.KnowledgeBase) DiscountExecutor {
+func NewDiscountUsecase(logger config.Logger, rulebase zen.Decision) DiscountExecutor {
 	return &discountUsecase{
 		logger:        logger,
-		knowledgeBase: knowledgeBase,
+		ruleBase: 	   rulebase,
 	}
 }
 
 func (uc *discountUsecase) CheckDiscount(discount *model.Discount) (float32, error) {
-	dataCtx := ast.NewDataContext()
-	err := dataCtx.Add("D", discount)
-	if err != nil {
-		return 0, err
-	}
 
-	engine := engine.NewGruleEngine()
-	err = engine.Execute(dataCtx, uc.knowledgeBase)
+	response, err := uc.ruleBase.Evaluate(map[string]any{"isContinentSoldOut": discount.IsContinentSoldOut, "isContinentDiff": discount.IsContinentDiff})
 	if err != nil {
-		return 0, err
+		panic(err)
 	}
+	var data ResultDataDiscount
+	err = json.Unmarshal([]byte(response.Result), &data)
+	return data.Output, nil
+	// dataCtx := ast.NewDataContext()
+	// err := dataCtx.Add("D", discount)
+	// if err != nil {
+	// 	return 0, err
+	// }
 
-	return discount.DiscountAmount, nil
+	// engine := engine.NewGruleEngine()
+	// err = engine.Execute(dataCtx, uc.knowledgeBase)
+	// if err != nil {
+	// 	return 0, err
+	// }
+
+	// return discount.DiscountAmount, nil
 }
