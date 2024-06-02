@@ -37,17 +37,4 @@ func (uc *discountUsecase) CheckDiscount(discount *model.Discount) (float32, err
 	var data ResultDataDiscount
 	err = json.Unmarshal([]byte(response.Result), &data)
 	return data.Output, nil
-	// dataCtx := ast.NewDataContext()
-	// err := dataCtx.Add("D", discount)
-	// if err != nil {
-	// 	return 0, err
-	// }
-
-	// engine := engine.NewGruleEngine()
-	// err = engine.Execute(dataCtx, uc.knowledgeBase)
-	// if err != nil {
-	// 	return 0, err
-	// }
-
-	// return discount.DiscountAmount, nil
 }

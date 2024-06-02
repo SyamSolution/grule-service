@@ -30,7 +30,6 @@ func NewEligibleUsecase(logger config.Logger, rulebase zen.Decision) EligibleExe
 }
 
 func (uc *eligibleUsecase) CheckEligibility(eligible *model.Eligible) (bool, error) {
-	
 	response, err := uc.ruleBase.Evaluate(map[string]any{"day": eligible.Day, "month": eligible.Month, "year": eligible.Year})
 	if err != nil {
 		panic(err)
