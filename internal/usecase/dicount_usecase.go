@@ -9,8 +9,8 @@ import (
 )
 
 type discountUsecase struct {
-	logger        config.Logger
-	ruleBase 	  zen.Decision
+	logger   config.Logger
+	ruleBase zen.Decision
 }
 
 type ResultDataDiscount struct {
@@ -23,8 +23,8 @@ type DiscountExecutor interface {
 
 func NewDiscountUsecase(logger config.Logger, rulebase zen.Decision) DiscountExecutor {
 	return &discountUsecase{
-		logger:        logger,
-		ruleBase: 	   rulebase,
+		logger:   logger,
+		ruleBase: rulebase,
 	}
 }
 
@@ -35,6 +35,8 @@ func (uc *discountUsecase) CheckDiscount(discount *model.Discount) (float32, err
 		panic(err)
 	}
 	var data ResultDataDiscount
-	err = json.Unmarshal([]byte(response.Result), &data)
+	if err := json.Unmarshal([]byte(response.Result), &data); err != nil {
+		return 0, err
+	}
 	return data.Output, nil
 }
