@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/SyamSolution/grule-service/config"
+	"github.com/SyamSolution/grule-service/config/middleware"
 	"github.com/SyamSolution/grule-service/internal/handler"
 	"github.com/SyamSolution/grule-service/internal/usecase"
 	"github.com/gofiber/fiber/v2"
@@ -55,6 +56,7 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 
+	app.Use(middleware.SecureHeadersMiddleware)
 	//=== rules routes ===//
 	app.Post("/check-eligible", eligibleHandler.CheckEligibility)
 	app.Post("/check-discount", discountHandler.CheckDiscount)

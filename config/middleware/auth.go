@@ -18,3 +18,12 @@ func Auth() fiber.Handler {
 		return c.Next()
 	}
 }
+
+func SecureHeadersMiddleware(c *fiber.Ctx) error {
+	c.Set("Content-Security-Policy", "default-src 'self'")
+	c.Set("X-Content-Type-Options", "nosniff")
+	c.Set("X-Frame-Options", "DENY")
+	c.Set("X-XSS-Protection", "1; mode=block")
+
+	return c.Next()
+}
